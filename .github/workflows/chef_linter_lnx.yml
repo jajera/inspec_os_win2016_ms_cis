@@ -1,0 +1,28 @@
+name: Run Chef Cookstyle
+
+on: push
+
+jobs:
+  super-lint:
+    name: Lint chef code using cookstyle
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+
+    - name: Install cookstyle gem
+      run: gem install cookstyle
+
+    - name: Run cookstyle
+      run: cookstyle .
+  
+    - name: Install chefstyle gem
+      run: gem install chefstyle
+
+    - name: Run cookstyle
+      run: chefstyle .
