@@ -1,3 +1,9 @@
+#
+# Profile:: inspec_os_win2016_ms_cis
+# Control:: section_01
+#
+# Copyright:: 2021, The Authors, All Rights Reserved.
+
 control '1.1.1_L1_Ensure_Enforce_password_history_is_set_to_24_or_more_passwords' do
   title "(L1) Ensure 'Enforce password history' is set to '24 or more password(s)'"
   desc  "

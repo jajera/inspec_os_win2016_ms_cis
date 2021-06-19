@@ -1,3 +1,9 @@
+#
+# Profile:: inspec_os_win2016_ms_cis
+# Control:: section_02
+#
+# Copyright:: 2021, The Authors, All Rights Reserved.
+
 control '2.2.1_L1_Ensure_Access_Credential_Manager_as_a_trusted_caller_is_set_to_No_One' do
   title "(L1) Ensure 'Access Credential Manager as a trusted caller' is set to 'No One'"
   desc  "

@@ -1,3 +1,9 @@
+#
+# Profile:: inspec_os_win2016_ms_cis
+# Control:: section_09
+#
+# Copyright:: 2021, The Authors, All Rights Reserved.
+
 control '9.1.1_L1_Ensure_Windows_Firewall_Domain_Firewall_state_is_set_to_On_recommended' do
   title "(L1) Ensure 'Windows Firewall: Domain: Firewall state' is set to 'On (recommended)'"
   desc  "

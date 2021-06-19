@@ -1,4 +1,10 @@
-ntrol '17.1.1_L1_Ensure_Audit_Credential_Validation_is_set_to_Success_and_Failure' do
+#
+# Profile:: inspec_os_win2016_ms_cis
+# Control:: section_17
+#
+# Copyright:: 2021, The Authors, All Rights Reserved.
+
+control '17.1.1_L1_Ensure_Audit_Credential_Validation_is_set_to_Success_and_Failure' do
   title "(L1) Ensure 'Audit Credential Validation' is set to 'Success and Failure'"
   desc  "
     This subcategory reports the results of validation tests on credentials submitted for a user account logon request. These events occur on the computer that is authoritative for the credentials. For domain accounts, the Domain Controller is authoritative, whereas for local accounts, the local computer is authoritative. In domain environments, most of the Account Logon events occur in the Security log of the Domain Controllers that are authoritative for the domain accounts. However, these events can occur on other computers in the organization when local accounts are used to log on. Events for this subcategory include:

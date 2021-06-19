@@ -1,3 +1,8 @@
+#
+# Profile:: inspec_os_win2016_ms_cis
+# Control:: section_18
+#
+# Copyright:: 2021, The Authors, All Rights Reserved.
 
 control '18.1.1.1_L1_Ensure_Prevent_enabling_lock_screen_camera_is_set_to_Enabled' do
   title "(L1) Ensure 'Prevent enabling lock screen camera' is set to 'Enabled'"

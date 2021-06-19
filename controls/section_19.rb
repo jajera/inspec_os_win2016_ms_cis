@@ -1,3 +1,8 @@
+#
+# Profile:: inspec_os_win2016_ms_cis
+# Control:: section_19
+#
+# Copyright:: 2021, The Authors, All Rights Reserved.
 
 control '19.1.3.1_L1_Ensure_Enable_screen_saver_is_set_to_Enabled' do
   title "(L1) Ensure 'Enable screen saver' is set to 'Enabled'"
