@@ -1407,7 +1407,7 @@ control '2.3.10.7_L1_Configure_Network_access_Named_Pipes_that_can_be_accessed_a
   "
   impact 1.0
   tag cce: 'CCE-38258-0'
-  NullSessionPipes = registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters').NullSessionPipes || []
+  NullSessionPipes = (registry_key('HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters').NullSessionPipes || []).freeze
   NullSessionPipes.select! { |value| value =~ /.+/ } if NullSessionPipes.is_a?(Array)
   describe NullSessionPipes do
     it { should be_empty }
