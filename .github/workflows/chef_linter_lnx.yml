@@ -20,9 +20,3 @@ jobs:
 
     - name: Run cookstyle
       run: cookstyle .
-  
-    - name: Install chefstyle gem
-      run: gem install chefstyle
-
-    - name: Run chefstyle
-      run: chefstyle .
