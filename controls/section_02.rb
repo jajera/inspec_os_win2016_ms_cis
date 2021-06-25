@@ -31,7 +31,7 @@ control '2.2.3_L1_Ensure_Access_this_computer_from_the_network__is_set_to_Admini
   "
   impact 1.0
   tag cce: 'CCE-35818-4'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-11']
+  permitted_principals = ['BUILTIN\\Administrators', 'NT AUTHORITY\\Authenticated Users']
   describe security_policy.SeNetworkLogonRight | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -70,7 +70,7 @@ control '2.2.6_L1_Ensure_Adjust_memory_quotas_for_a_process_is_set_to_Administra
   "
   impact 1.0
   tag cce: 'CCE-37071-8'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-19', 'S-1-5-20']
+  permitted_principals = ['BUILTIN\\Administrators', 'NT AUTHORITY\\LOCAL SERVICE', 'NT AUTHORITY\\NETWORK SERVICE']
   describe security_policy.SeIncreaseQuotaPrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -90,7 +90,7 @@ control '2.2.7_L1_Ensure_Allow_log_on_locally_is_set_to_Administrators' do
   impact 1.0
   tag cce: 'CCE-37659-0'
   describe security_policy do
-    its('SeInteractiveLogonRight') { should match_array ['S-1-5-32-544'] }
+    its('SeInteractiveLogonRight') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -113,7 +113,7 @@ control '2.2.9_L1_Ensure_Allow_log_on_through_Remote_Desktop_Services_is_set_to_
   "
   impact 1.0
   tag cce: 'CCE-37072-6'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-32-555']
+  permitted_principals = ['BUILTIN\\Administrators', 'BUILTIN\\Remote Desktop Users']
   describe security_policy.SeRemoteInteractiveLogonRight | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -133,7 +133,7 @@ control '2.2.10_L1_Ensure_Back_up_files_and_directories_is_set_to_Administrators
   impact 1.0
   tag cce: 'CCE-35912-5'
   describe security_policy do
-    its('SeBackupPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeBackupPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -158,7 +158,7 @@ control '2.2.11_L1_Ensure_Change_the_system_time_is_set_to_Administrators_LOCAL_
   "
   impact 1.0
   tag cce: 'CCE-37452-0'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-19']
+  permitted_principals = ['BUILTIN\\Administrators', 'NT AUTHORITY\\LOCAL SERVICE']
   describe security_policy.SeSystemtimePrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -175,7 +175,7 @@ control '2.2.12_L1_Ensure_Change_the_time_zone_is_set_to_Administrators_LOCAL_SE
   "
   impact 1.0
   tag cce: 'CCE-37700-2'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-19']
+  permitted_principals = ['BUILTIN\\Administrators', 'NT AUTHORITY\\LOCAL SERVICE']
   describe security_policy.SeTimeZonePrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -193,7 +193,7 @@ control '2.2.13_L1_Ensure_Create_a_pagefile_is_set_to_Administrators' do
   impact 1.0
   tag cce: 'CCE-35821-8'
   describe security_policy do
-    its('SeCreatePagefilePrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeCreatePagefilePrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -232,7 +232,7 @@ control '2.2.15_L1_Ensure_Create_global_objects_is_set_to_Administrators_LOCAL_S
   "
   impact 1.0
   tag cce: 'CCE-37453-8'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-19', 'S-1-5-20', 'S-1-5-6']
+  permitted_principals = ['BUILTIN\\Administrators', 'NT AUTHORITY\\LOCAL SERVICE', 'NT AUTHORITY\\NETWORK SERVICE', 'NT AUTHORITY\\SERVICE']
   describe security_policy.SeCreateGlobalPrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -267,9 +267,9 @@ control '2.2.18_L1_Ensure_Create_symbolic_links_is_set_to_Administrators_NT_VIRT
   "
   impact 1.0
   tag cce: 'CCE-35823-4'
-  permitted_principals = ['S-1-5-32-544']
+  permitted_principals = ['BUILTIN\\Administrators']
   if wmi({ namespace: 'root\\cimv2', query: 'SELECT name FROM Win32_ServerFeature WHERE ID = 20' }).name == 'Hyper-V'
-    permitted_principals << 'S-1-5-83-0'
+    permitted_principals << 'NT VIRTUAL MACHINE\\Virtual Machines'
   end
   describe security_policy.SeCreateSymbolicLinkPrivilege | permitted_principals do
     it { should match_array permitted_principals }
@@ -290,7 +290,7 @@ control '2.2.19_L1_Ensure_Debug_programs_is_set_to_Administrators' do
   impact 1.0
   tag cce: 'CCE-37075-9'
   describe security_policy do
-    its('SeDebugPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeDebugPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -312,10 +312,10 @@ control '2.2.21_L1_Ensure_Deny_access_to_this_computer_from_the_network_is_set_t
   impact 1.0
   tag cce: 'CCE-37954-5'
   describe security_policy do
-    its('SeDenyNetworkLogonRight') { should include 'S-1-5-32-546' }
+    its('SeDenyNetworkLogonRight') { should include 'BUILTIN\\Guests' }
   end
   describe security_policy do
-    its('SeDenyNetworkLogonRight') { should include 'S-1-5-114' }
+    its('SeDenyNetworkLogonRight') { should include 'NT AUTHORITY\\Authenticated Users4' }
   end
 end
 
@@ -333,7 +333,7 @@ control '2.2.22_L1_Ensure_Deny_log_on_as_a_batch_job_to_include_Guests' do
   impact 1.0
   tag cce: 'CCE-36923-1'
   describe security_policy do
-    its('SeDenyBatchLogonRight') { should include 'S-1-5-32-546' }
+    its('SeDenyBatchLogonRight') { should include 'BUILTIN\\Guests' }
   end
 end
 
@@ -351,7 +351,7 @@ control '2.2.23_L1_Ensure_Deny_log_on_as_a_service_to_include_Guests' do
   impact 1.0
   tag cce: 'CCE-36877-9'
   describe security_policy do
-    its('SeDenyServiceLogonRight') { should include 'S-1-5-32-546' }
+    its('SeDenyServiceLogonRight') { should include 'BUILTIN\\Guests' }
   end
 end
 
@@ -369,7 +369,7 @@ control '2.2.24_L1_Ensure_Deny_log_on_locally_to_include_Guests' do
   impact 1.0
   tag cce: 'CCE-37146-8'
   describe security_policy do
-    its('SeDenyInteractiveLogonRight') { should include 'S-1-5-32-546' }
+    its('SeDenyInteractiveLogonRight') { should include 'BUILTIN\\Guests' }
   end
 end
 
@@ -391,10 +391,10 @@ control '2.2.26_L1_Ensure_Deny_log_on_through_Remote_Desktop_Services_is_set_to_
   impact 1.0
   tag cce: 'CCE-36867-0'
   describe security_policy do
-    its('SeDenyRemoteInteractiveLogonRight') { should include 'S-1-5-32-546' }
+    its('SeDenyRemoteInteractiveLogonRight') { should include 'BUILTIN\\Guests' }
   end
   describe security_policy do
-    its('SeDenyRemoteInteractiveLogonRight') { should include 'S-1-5-113' }
+    its('SeDenyRemoteInteractiveLogonRight') { should include 'NT AUTHORITY\\Authenticated Users3' }
   end
 end
 
@@ -428,7 +428,7 @@ control '2.2.29_L1_Ensure_Force_shutdown_from_a_remote_system_is_set_to_Administ
   impact 1.0
   tag cce: 'CCE-37877-8'
   describe security_policy do
-    its('SeRemoteShutdownPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeRemoteShutdownPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -449,7 +449,7 @@ control '2.2.30_L1_Ensure_Generate_security_audits_is_set_to_LOCAL_SERVICE_NETWO
   "
   impact 1.0
   tag cce: 'CCE-37639-2'
-  permitted_principals = ['S-1-5-19', 'S-1-5-20']
+  permitted_principals = ['NT AUTHORITY\\LOCAL SERVICE', 'NT AUTHORITY\\NETWORK SERVICE']
   describe security_policy.SeAuditPrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -479,7 +479,7 @@ control '2.2.32_L1_Ensure_Impersonate_a_client_after_authentication_is_set_to_Ad
   "
   impact 1.0
   tag cce: 'CCE-37106-2'
-  permitted_principals = ['S-1-5-32-544', 'S-1-5-19', 'S-1-5-20', 'S-1-5-6', 'S-1-5-17']
+  permitted_principals = ['BUILTIN\\Administrators', 'NT AUTHORITY\\LOCAL SERVICE', 'NT AUTHORITY\\NETWORK SERVICE', 'NT AUTHORITY\\SERVICE', 'NT AUTHORITY\\USR']
   describe security_policy.SeImpersonatePrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -497,7 +497,7 @@ control '2.2.33_L1_Ensure_Increase_scheduling_priority_is_set_to_Administrators'
   impact 1.0
   tag cce: 'CCE-38326-5'
   describe security_policy do
-    its('SeIncreaseBasePriorityPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeIncreaseBasePriorityPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -515,7 +515,7 @@ control '2.2.34_L1_Ensure_Load_and_unload_device_drivers_is_set_to_Administrator
   impact 1.0
   tag cce: 'CCE-36318-4'
   describe security_policy do
-    its('SeLoadDriverPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeLoadDriverPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -551,7 +551,7 @@ control '2.2.38_L1_Ensure_Manage_auditing_and_security_log_is_set_to_Administrat
   impact 1.0
   tag cce: 'CCE-35906-7'
   describe security_policy do
-    its('SeSecurityPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeSecurityPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -585,7 +585,7 @@ control '2.2.40_L1_Ensure_Modify_firmware_environment_values_is_set_to_Administr
   impact 1.0
   tag cce: 'CCE-38113-7'
   describe security_policy do
-    its('SeSystemEnvironmentPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeSystemEnvironmentPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -601,7 +601,7 @@ control '2.2.41_L1_Ensure_Perform_volume_maintenance_tasks_is_set_to_Administrat
   impact 1.0
   tag cce: 'CCE-36143-6'
   describe security_policy do
-    its('SeManageVolumePrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeManageVolumePrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -617,7 +617,7 @@ control '2.2.42_L1_Ensure_Profile_single_process_is_set_to_Administrators' do
   impact 1.0
   tag cce: 'CCE-37131-0'
   describe security_policy do
-    its('SeProfileSingleProcessPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeProfileSingleProcessPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -654,7 +654,7 @@ control '2.2.44_L1_Ensure_Replace_a_process_level_token_is_set_to_LOCAL_SERVICE_
   "
   impact 1.0
   tag cce: 'CCE-37430-6'
-  permitted_principals = ['S-1-5-19', 'S-1-5-20']
+  permitted_principals = ['NT AUTHORITY\\LOCAL SERVICE', 'NT AUTHORITY\\NETWORK SERVICE']
   describe security_policy.SeAssignPrimaryTokenPrivilege | permitted_principals do
     it { should match_array permitted_principals }
   end
@@ -676,7 +676,7 @@ control '2.2.45_L1_Ensure_Restore_files_and_directories_is_set_to_Administrators
   impact 1.0
   tag cce: 'CCE-37613-7'
   describe security_policy do
-    its('SeRestorePrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeRestorePrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -694,7 +694,7 @@ control '2.2.46_L1_Ensure_Shut_down_the_system_is_set_to_Administrators' do
   impact 1.0
   tag cce: 'CCE-38328-1'
   describe security_policy do
-    its('SeShutdownPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeShutdownPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
@@ -712,7 +712,7 @@ control '2.2.48_L1_Ensure_Take_ownership_of_files_or_other_objects_is_set_to_Adm
   impact 1.0
   tag cce: 'CCE-38325-7'
   describe security_policy do
-    its('SeTakeOwnershipPrivilege') { should match_array ['S-1-5-32-544'] }
+    its('SeTakeOwnershipPrivilege') { should match_array ['BUILTIN\\Administrators'] }
   end
 end
 
